@@ -1,3 +1,7 @@
+self.addEventListener('install', function(e) {
+  self.skipWaiting();
+});
+
 self.addEventListener("activate", function (event) {
   event.waitUntil(
     caches.keys().then(function (cacheNames) {
@@ -14,4 +18,11 @@ self.addEventListener("activate", function (event) {
       );
     })
   );
+   self.registration.unregister()
+    .then(function() {
+      return self.clients.matchAll();
+    })
+    .then(function(clients) {
+      clients.forEach(client => client.navigate(client.url))
+    });
 });
