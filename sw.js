@@ -1,3 +1,4 @@
+'use strict';
 self.addEventListener('install', function(e) {
   console.log('script install')
   self.skipWaiting();
